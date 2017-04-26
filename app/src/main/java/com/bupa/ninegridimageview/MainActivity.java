@@ -11,6 +11,7 @@ import com.bupa.ninegridimageview.adapter.PhotoAdapter;
 import com.bupa.ninegridimageview.base.BaseActivity;
 import com.bupa.ninegridimageview.entity.Photo;
 import com.bupa.ninegridimageview.util.UIUtils;
+import com.jaeger.library.StatusBarUtil;
 import com.jaeger.ninegridimageview.NineGridImageView;
 import com.liuguangqiang.recyclerview.widget.SuperRecyclerView;
 
@@ -50,7 +51,7 @@ public class MainActivity extends BaseActivity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        this.getWindow().setBackgroundDrawableResource(android.R.color.transparent);
+        StatusBarUtil.setColor(this,0xd793d0);
         initView();
         initData();
         listener();
@@ -78,8 +79,10 @@ public class MainActivity extends BaseActivity {
             Photo photo = new Photo("看图字不重要。 ( •̀ .̫ •́ )", imgUrls);
             mPhotoList.add(photo);
         }
-       /* mPhotoList.add(new Photo("完整九宫格,看图字不重要。 ( •̀ .̫ •́ )", imgUrls.subList(0, 9)));
-        mPhotoList.add(new Photo("看图字不重要。 ( •̀ .̫ •́ )", imgUrls.subList(9, IMG_URL_LIST.length)));*/
+       /* mPhotoList.add(new Photo("完整九宫格,看图字不重要。 ( •̀ .̫ •́ )", imgUrls.subList(0, 9)));*/
+        List<String> imgUrls2 = new ArrayList<>();
+        imgUrls2.addAll(Arrays.asList(IMG_URL_LIST).subList(0,IMG_URL_LIST.length));
+        mPhotoList.add(new Photo("看图字不重要。 ( •̀ .̫ •́ )", imgUrls2.subList(9, IMG_URL_LIST.length)));
         mPhotoAdapter = new PhotoAdapter(this, mPhotoList, NineGridImageView.STYLE_GRID, mPopupWindow, mImageView, new PhotoAdapter.IShow() {
             @Override
             public void show() {
